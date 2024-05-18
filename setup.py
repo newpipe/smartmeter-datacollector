@@ -50,13 +50,13 @@ setup(
         exclude=["contrib", "doc", "LICENSES", "scripts", "tests", "tests."]
     ),
     include_package_data=True,
-    install_requires=[
-        'aioserial==1.3.1',
-        'asyncio-mqtt==0.16.2',
-        'gurux-dlms==1.0.150',
-        'paho-mqtt==1.6.1',
-        'pyserial==3.5'
-    ],
+    install_requires=["aioserial==1.3.1; python_version >= '3.6' and python_version < '4.0'", "asyncio-mqtt==0.16.2; python_version >= '3.7'", "certifi==2024.2.2; python_version >= '3.6'", "charset-normalizer==3.3.2; python_full_version >= '3.7.0'", 'gurux-dlms==1.0.150', "idna==3.7; python_version >= '3.5'", 'influxdb==5.3.2', "msgpack==1.0.8; python_version >= '3.8'", 'paho-mqtt==1.6.1', 'pyserial==3.5', "python-dateutil==2.9.0.post0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'", 'pytz==2024.1', "requests==2.31.0; python_version >= '3.7'", "six==1.16.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'", "urllib3==2.2.1; python_version >= '3.8'"
+
+
+
+
+
+                      ],
     scripts=["bin/smartmeter-datacollector"],
     zip_safe=True,
     dependency_links=[],
