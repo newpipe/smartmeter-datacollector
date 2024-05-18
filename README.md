@@ -261,3 +261,52 @@ Make sure to run `format_check` / `format`, `isort_check` / `isort`, `lint_check
 
 # Acknowledgements
 `smartmeter-datacollector` and its companion project [`smartmeter-datacollector-configurator`](https://github.com/scs/smartmeter-datacollector-configurator) have been developed by **[Supercomputing Systems AG](https://www.scs.ch)** on behalf of and funded by **[EKZ](https://www.ekz.ch/)**.
+
+# Installation Raspberry Pi
+## Checkout the code
+
+Use `git` to clone / checkout `smartmeter-datacollector` from GitHub using
+
+```
+git clone git@github.com:newpipe/smartmeter-datacollector.git
+```
+
+## Setup Development Environment
+
+Ensure, the right PIP repository is defined in `/etc/pip.conf`:
+```
+[global]
+#extra-index-url=https://www.piwheels.org/simple
+extra-index-url=https://pypi.org/simple
+```
+This is important to avoid problems with the hashes defined in the Pipfile.lock.
+
+Change into the just checked out directory with
+
+```cd smartmeter-datacollector```
+
+`smartmeter-datacollector` uses [`pipenv`](https://pipenv.pypa.io/en/latest/) to manage its dependencies and setup a virtual environment. Run the following command to setup the initial development environment:
+
+```
+pipenv install --dev
+```
+
+This will install all runtime and development dependencies for `smartmeter-datacollector` in a new virtual environment. Now you are ready to start working on `smartmeter-datacollector`.
+
+# Static name for devices
+
+Get the devices "ATTRS{serial}" with command
+udevadm info --name=/dev/ttyUSB0 --attribute-walk
+
+Make an assignment in file /etc/udev/rules.d/z21_persistent-local.rules
+
+```commandline
+# Static name for MBUS Master on USB
+KERNEL=="ttyUSB?", SUBSYSTEMS=="usb", ATTRS{serial}=="AWCOt114J20", SYMLINK+="mbusMaster"
+
+# Static names for Modbus Master on USB
+KERNEL=="ttyUSB?", SUBSYSTEMS=="usb", ATTRS{serial}=="AR0K44P6", SYMLINK+="modbusMaster"
+
+# Static names for MBUS Slave on USB
+KERNEL=="ttyUSB?", SUBSYSTEMS=="usb", ATTRS{serial}=="AHCKb118D16", SYMLINK+="mbusSlave"
+```
